@@ -10,11 +10,19 @@ Route::get('/', function () {
 })->name('home');
 
 Route::get('/about', function () {
-    return view('about');
+    return view('about', [
+        'name' => 'Kanokporn Jeamthong',
+        'date' => '5 กรกฎาคม 2026',
+    ]);
 })->name('about');
 
 Route::get('/blog', function () {
-    return view('blog');
+    $blog = DB::table('blogs')
+        ->where('status', true)
+        ->orderByDesc('id')
+        ->get();
+
+    return view('blog', compact('blog'));
 })->name('blog');
 
 Route::get('/about2', [AdminController::class, 'about2'])->name('about2');
@@ -46,3 +54,6 @@ Route::get('/delete/{id}', [AdminController::class, 'delete'])->name('delete');
 Route::get('/change/{id}', [AdminController::class, 'change'])->name('change');
 Route::get('/edit/{id}', [AdminController::class, 'edit'])->name('edit');
 Route::post('/update/{id}', [AdminController::class, 'update'])->name('update');
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('dashboard');

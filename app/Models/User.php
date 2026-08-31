@@ -2,14 +2,21 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 
-class Claim extends Model
+class User extends Authenticatable
 {
+    use Notifiable;
+
     protected $fillable = [
-        'serial_number',
+        'name',
         'email',
-        'problem',
-        'priority'
+        'password',
+    ];
+
+    protected $hidden = [
+        'password',
+        'remember_token',
     ];
 }

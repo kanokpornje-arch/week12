@@ -1,10 +1,10 @@
-@extends('layout')
+@extends('layouts.app')
 
 @section('title', 'เขียนบทความใหม่')
 
 @section('content')
     <h2 class="text text-center by-2">เขียนบทความใหม่</h2>
-    <form method="POST" action="/insert">
+    <form method="POST" action="{{ route('blog.store') }}">
         @csrf
         <div class="form-group">
             <label for="title" class="form-label">หัวข้อบทความ</label>

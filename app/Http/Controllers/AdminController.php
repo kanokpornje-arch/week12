@@ -102,4 +102,9 @@ class AdminController extends Controller
         DB::table('blogs')->where('id', $id)->update($data);
         return redirect('/blog2');
     }
+    function __construct()
+    {
+        $this->middleware('auth');
+
+    }
 }
